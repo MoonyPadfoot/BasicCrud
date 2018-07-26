@@ -12,6 +12,10 @@ Public Class Users
     Public Property TName
     Public Property TSurname
     Public Property TAge
+    Public Property TMName
+    Public Property TEName
+    Public Property TCourse
+    Public Property TGender
 
     Public Function Read() As Integer
         count = 0
@@ -50,8 +54,8 @@ Public Class Users
     Public Function Save() As Boolean
         Try
             openCon()
-            query = "INSERT INTO dbtest.tabletest (idtableTest, testName, testSurname, testAge)"
-            query &= " VALUES (@0, @1, @2, @3)"
+            query = "INSERT INTO dbtest.tabletest (idtableTest, testName, testSurname, testAge, testCourse, testGender, testMName, testEName)"
+            query &= " VALUES (@0, @1, @2, @3, @4, @5, @6, @7)"
             command = New MySqlCommand(query, conn)
 
             With command.Parameters
@@ -59,6 +63,10 @@ Public Class Users
                 .AddWithValue("@1", Me.TName)
                 .AddWithValue("@2", Me.TSurname)
                 .AddWithValue("@3", Me.TAge)
+                .AddWithValue("@4", Me.TCourse)
+                .AddWithValue("@5", Me.TGender)
+                .AddWithValue("@6", Me.TMName)
+                .AddWithValue("@7", Me.TEName)
             End With
             command.ExecuteNonQuery()
 
@@ -86,7 +94,8 @@ Public Class Users
     Public Function Update() As Boolean
         Try
             openCon()
-            query = "UPDATE dbtest.tabletest SET testName = @1, testSurname = @2, testAge = @3 WHERE idtableTest = @0"
+            query = "UPDATE dbtest.tabletest SET testName = @1, testSurname = @2, testAge = @3, testCourse = @4, testGender = @5,"
+            query &= "testMName = @6, testEName = @7 WHERE idtableTest = @0"
             command = New MySqlCommand(query, conn)
 
             With command.Parameters
@@ -94,6 +103,10 @@ Public Class Users
                 .AddWithValue("@1", Me.TName)
                 .AddWithValue("@2", Me.TSurname)
                 .AddWithValue("@3", Me.TAge)
+                .AddWithValue("@4", Me.TCourse)
+                .AddWithValue("@5", Me.TGender)
+                .AddWithValue("@6", Me.TMName)
+                .AddWithValue("@7", Me.TEName)
             End With
             command.ExecuteNonQuery()
 
